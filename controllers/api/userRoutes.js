@@ -64,10 +64,10 @@ router.post('/signup', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
 
-    if (!userData) {
+    if (userData) {
       res
         .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
+        .json({ message: 'Email is already being used, please use a different one' });
       return;
     }
 
